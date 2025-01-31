@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function App() {
   const [displayValue, setDisplayValue] = useState("");
-  let lastOperator = "";
+  const [lastOperator, setLastOperator] = useState(""); //value heavily depends on changing value, so need to use state, even if not direct ui element
 
   const handleOnClick = (buttonText) => {
     // Handle action for = button i.e calculate instead of displaying it
@@ -41,10 +41,10 @@ function App() {
     if (["%", "/", "*", "+", "-"].includes(buttonText)) {
       const lastCharacter = displayValue.slice(-1);
       // update the last operator
-      lastOperator = buttonText;
+      setLastOperator(buttonText);
       if (["%", "/", "*", "+", "-"].includes(lastCharacter)) {
         // removing last character from display value
-        setDisplayValue((prevState) => prevState + displayValue.slice(0, -1));
+        setDisplayValue(displayValue.slice(0, -1));
       }
     }
 
